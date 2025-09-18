@@ -1,0 +1,33 @@
+[
+    {
+        "name" : "duke",
+        "age" : "3",
+        "sex" : "male",
+        "vaccines" : "ok",
+        "hairColor" : "black",
+        "weight" : "3",
+        "routineControll" : "updated"
+    },
+
+    {
+        "name" : "lizzy",
+        "age" : "1",
+        "sex" : "female",
+        "vaccines" : "not updated",
+        "hairColor" : "white",
+        "weight" : "1.5",
+        "routineControll" : "not updated"
+    },
+
+     {
+        "name" : "pink",
+        "age" : "2",
+        "sex" : "female",
+        "vaccines" : "updated",
+        "hairColor" : "",
+        "weight" : "2",
+        "routineControll" : "not updated"
+    }
+
+
+]

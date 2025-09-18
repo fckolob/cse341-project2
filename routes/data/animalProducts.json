@@ -1,0 +1,34 @@
+[
+    {
+        "name" : "dog collar",
+        "brand" : "superdog",
+        "description" : "Strong collar for dogs",
+        "price" : "12.33",
+        "color" : "black",
+        "inStock" : "yes",
+        "size" : "large"
+
+    },
+
+    {
+        "name" : "cat bell",
+        "brand" : "catman",
+        "description" : "Little bell for find your cat",
+        "price" : "4.99",
+        "color" : "golden",
+        "inStock" : "no",
+        "size" : "unique"
+
+    },
+
+    {
+        "name" : "dog swetter",
+        "brand" : "powerdog",
+        "description" : "Warm swetter for adult dogs",
+        "price" : "25.95",
+        "color" : "red",
+        "inStock" : "yes",
+        "size" : "medium"
+
+    }
+]
