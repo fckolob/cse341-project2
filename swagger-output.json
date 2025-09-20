@@ -13,10 +13,161 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Shows Hello World!",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/pets/": {
+      "get": {
+        "description": "Returns all the pets.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new pet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Rudolf"
+                },
+                "age": {
+                  "example": "2"
+                },
+                "sex": {
+                  "example": "male"
+                },
+                "hairColor": {
+                  "example": "brown"
+                },
+                "weight": {
+                  "example": "15"
+                },
+                "vaccines": {
+                  "example": "updated"
+                },
+                "routineControll": {
+                  "example": "updated"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pets/{id}": {
+      "get": {
+        "description": "Returns the specified pet by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update the specified pet information by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Katie"
+                },
+                "age": {
+                  "example": "3"
+                },
+                "sex": {
+                  "example": "female"
+                },
+                "hairColor": {
+                  "example": "black and white"
+                },
+                "weight": {
+                  "example": "3"
+                },
+                "vaccines": {
+                  "example": "updated"
+                },
+                "routineControll": {
+                  "example": "updated"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the sepcified pet by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
