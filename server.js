@@ -19,6 +19,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', require('./routes'));
 
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.id, `Caught exception: ${err}\n` + `Exception origin: ${origin}`)
+})
+
 mongodb.initDb((err) => {
   if (err) {
     console.error('Failed to connect to the database');

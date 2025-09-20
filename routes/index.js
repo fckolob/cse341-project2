@@ -6,4 +6,6 @@ router.get('/', (req, res) => {
 
 router.use('/pets', require('./datax/pets'));
 
+router.use('/products', require('./datax/animalProducts'))
+
 module.exports = router;

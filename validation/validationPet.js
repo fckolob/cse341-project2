@@ -8,13 +8,13 @@ const petValidationRules = () => {
     // sex must be male or female.
     body('sex').trim().toLowerCase().notEmpty().isAlpha().isIn( ['male', 'female'] ),
     // vaccines can be updated or not updated.
-    body('vaccines').toLowerCase().notEmpty().isAlpha().isIn(['updated', 'not updated']),
+    body('vaccines').toLowerCase().notEmpty().isIn(['updated', 'not updated']),
     // hair color must be alphabetic, must have at least three characters.
     body('hairColor').trim().notEmpty().isAlpha().isLength( { min: 3} ),
     // weight must be a float and has a value of at least 0.1.
     body('weight').trim().notEmpty().isFloat( { min: 0.1} ),
     // RoutineControll must be updated or not updated.
-    body('routineControll').toLowerCase().notEmpty().isAlpha().isIn(['updated', 'not updated'])
+    body('routineControll').toLowerCase().notEmpty().isIn(['updated', 'not updated'])
 
   ]
 }

@@ -23,7 +23,7 @@
     },
     "/pets/": {
       "get": {
-        "description": "Returns all the pets.",
+        "description": "Returns all the pets in the store.",
         "responses": {
           "200": {
             "description": "OK"
@@ -34,7 +34,7 @@
         }
       },
       "post": {
-        "description": "Creates a new pet",
+        "description": "Creates a new pet.",
         "parameters": [
           {
             "name": "body",
@@ -43,10 +43,10 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "Rudolf"
+                  "example": "buck"
                 },
                 "age": {
-                  "example": "2"
+                  "example": "1"
                 },
                 "sex": {
                   "example": "male"
@@ -55,13 +55,13 @@
                   "example": "brown"
                 },
                 "weight": {
-                  "example": "15"
+                  "example": "3.5"
                 },
                 "vaccines": {
                   "example": "updated"
                 },
                 "routineControll": {
-                  "example": "updated"
+                  "example": "not updated"
                 }
               }
             }
@@ -70,6 +70,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -104,7 +107,7 @@
         }
       },
       "put": {
-        "description": "Update the specified pet information by id",
+        "description": "Updates the specified pet by id.",
         "parameters": [
           {
             "name": "id",
@@ -119,19 +122,19 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "Katie"
+                  "example": "buffy"
                 },
                 "age": {
-                  "example": "3"
+                  "example": "0.5"
                 },
                 "sex": {
                   "example": "female"
                 },
                 "hairColor": {
-                  "example": "black and white"
+                  "example": "any"
                 },
                 "weight": {
-                  "example": "3"
+                  "example": "white"
                 },
                 "vaccines": {
                   "example": "updated"
@@ -147,13 +150,173 @@
           "204": {
             "description": "No Content"
           },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "Deletes the sepcified pet by id",
+        "description": "Deletes the specified pet by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "description": "Returns all the products in the inventory.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new product.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "cat fancy collar"
+                },
+                "brand": {
+                  "example": "Fancy Cat"
+                },
+                "description": {
+                  "example": "A very elegant cat collar."
+                },
+                "price": {
+                  "example": "20.25"
+                },
+                "color": {
+                  "example": "golden"
+                },
+                "inStock": {
+                  "example": "yes"
+                },
+                "size": {
+                  "example": "medium"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "Returns the specified product by id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the specified product by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "water container"
+                },
+                "brand": {
+                  "example": "metal pet"
+                },
+                "description": {
+                  "example": "metalic water container for pets"
+                },
+                "price": {
+                  "example": "16.85"
+                },
+                "color": {
+                  "example": "sliver"
+                },
+                "inStock": {
+                  "example": "yes"
+                },
+                "size": {
+                  "example": "unique"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the specified product by id.",
         "parameters": [
           {
             "name": "id",
