@@ -9,7 +9,7 @@ const swaggerDocument = require('./swagger-output.json');
 const bodyparser = require('body-parser');
 app.use(cors({
   origin: [
-    'https://cse341-project1-22ot.onrender.com',
+    'https://cse341-project2-wok4.onrender.com',
     'http://localhost:3000'
   ]
 }));
