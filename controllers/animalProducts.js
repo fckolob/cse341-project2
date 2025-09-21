@@ -61,7 +61,7 @@ const updateProduct = async (req, res) => {
   };
   const response = await mongodb
     .getDb()
-    .collection('product')
+    .collection('products')
     .replaceOne({ _id: _productId }, product);
 
   if (response.modifiedCount > 0) {
