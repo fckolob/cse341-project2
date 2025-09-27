@@ -13,7 +13,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "Shows Hello World!",
+        "description": "API root endpoint. Returns a welcome message.",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,16 +21,48 @@
         }
       }
     },
-    "/pets/": {
+    "/github/callback": {
       "get": {
-        "description": "Returns all the pets in the store.",
+        "description": "GitHub OAuth callback endpoint.",
+        "responses": {
+          "302": {
+            "description": "Redirect after successful authentication"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "Initiates GitHub login.",
+        "responses": {
+          "302": {
+            "description": "Redirect to GitHub login"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "Logs out the current user.",
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "Successfully logged out"
           }
+        }
+      }
+    },
+    "/pets/": {
+      "get": {
+        "description": "Returns all pets in the database.",
+        "responses": {
+          "204": {
+            "description": "OK"
+          }, "200":{
+            "description" : "Ok"
+          }, "500": { "description": "Failed to fetch pets"}
         }
       },
       "post": {
@@ -42,156 +74,93 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "buck"
-                },
-                "age": {
-                  "example": "1"
-                },
-                "sex": {
-                  "example": "male"
-                },
-                "hairColor": {
-                  "example": "brown"
-                },
-                "weight": {
-                  "example": "3.5"
-                },
-                "vaccines": {
-                  "example": "updated"
-                },
-                "routineControll": {
-                  "example": "not updated"
-                }
+                "name": { "type": "string", "example": "duke" },
+                "age": { "type": "number", "example": 3 },
+                "sex": { "type": "string", "example": "male" },
+                "hairColor": { "type": "string", "example": "black" },
+                "weight": { "type": "number", "example": 3 },
+                "vaccines": { "type": "string", "example": "updated" },
+                "routineControll": { "type": "string", "example": "updated" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "Pet created successfully" },
+          "422": { "description": "Validation Error" },
+          "481": { "description": "Authentication Error" }, "200":{
+            "description" : "Pet created successfully"
+          }, "500": { "description": "Some error ocurred while creating the pet"}
         }
       }
     },
     "/pets/{id}": {
       "get": {
-        "description": "Returns the specified pet by id.",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Returns a single pet by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Pet ID" }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": { "description": "OK" }, "200":{
+            "description" : "Ok"
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
+          "404": { "description": "Pet not found" }
+        }, "500": { "description": "Failed to fetch pet"}
       },
       "put": {
-        "description": "Updates the specified pet by id.",
+        "description": "Updates a pet by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Pet ID" },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "buffy"
-                },
-                "age": {
-                  "example": "0.5"
-                },
-                "sex": {
-                  "example": "female"
-                },
-                "hairColor": {
-                  "example": "white"
-                },
-                "weight": {
-                  "example": "1.3"
-                },
-                "vaccines": {
-                  "example": "updated"
-                },
-                "routineControll": {
-                  "example": "updated"
-                }
+                "name": { "type": "string", "example": "duke" },
+                "age": { "type": "number", "example": 3 },
+                "sex": { "type": "string", "example": "male" },
+                "hairColor": { "type": "string", "example": "black" },
+                "weight": { "type": "number", "example": 3 },
+                "vaccines": { "type": "string", "example": "updated" },
+                "routineControll": { "type": "string", "example": "updated" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "204": { "description": "Pet updated successfully" }, "200":{
+            "description" : "Pet updated successfully"
           },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "422": { "description": "Unprocessable Entity" },
+          "404": { "description": "Pet not found" },
+          "481": { "description": "Authentication Error" }, "500": { "description": "Some error ocurred while updating pet"}
         }
       },
       "delete": {
-        "description": "Deletes the specified pet by id.",
+        "description": "Deletes a pet by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Pet ID" }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "204": { "description": "Pet deleted successfully" }, "200":{
+            "description" : "Pet deleted successfully"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "404": { "description": "Pet not found" },
+          "481": { "description": "Authentication Error" }, "500": { "description": "Some error ocurred while updating the pet"}
         }
       }
     },
     "/products/": {
       "get": {
-        "description": "Returns all the products in the inventory.",
+        "description": "Returns all animal products.",
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "OK" },
+          "200": { "description": "OK"}, "500": { "description": "Failed to fetch products"}
         }
       },
       "post": {
-        "description": "Creates a new product.",
+        "description": "Creates a new animal product.",
         "parameters": [
           {
             "name": "body",
@@ -199,139 +168,73 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "cat fancy collar"
-                },
-                "brand": {
-                  "example": "Fancy Cat"
-                },
-                "description": {
-                  "example": "A very elegant cat collar."
-                },
-                "price": {
-                  "example": "20.25"
-                },
-                "color": {
-                  "example": "golden"
-                },
-                "inStock": {
-                  "example": "yes"
-                },
-                "size": {
-                  "example": "medium"
-                }
+                "name": { "type": "string", "example": "dog collar" },
+                "brand": { "type": "string", "example": "Fancy Cat" },
+                "description": { "type": "string", "example": "A very elegant cat collar." },
+                "price": { "type": "number", "example": 20.25 },
+                "color": { "type": "string", "example": "golden" },
+                "inStock": { "type": "string", "example": "yes" },
+                "size": { "type": "string", "example": "medium" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "Product created successfully" },
+          "200":{"description": "Product created succesfully"},
+          "422": { "description": "Unprocessable Entity" },
+          "481": { "description": "Authentication Error" }, "500": { "description": "Some error ocurred while creating product"}
         }
       }
     },
     "/products/{id}": {
       "get": {
-        "description": "Returns the specified product by id.",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Returns a single product by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Product ID" }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "OK" },
+          "404": { "description": "Product not found" }, "500": { "description": "Failed to fetch product"}
         }
       },
       "put": {
-        "description": "Updates the specified product by id.",
+        "description": "Updates a product by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Product ID" },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "water container"
-                },
-                "brand": {
-                  "example": "metal pet"
-                },
-                "description": {
-                  "example": "metalic water container for pets"
-                },
-                "price": {
-                  "example": "16.85"
-                },
-                "color": {
-                  "example": "sliver"
-                },
-                "inStock": {
-                  "example": "yes"
-                },
-                "size": {
-                  "example": "unique"
-                }
+                "name": { "type": "string", "example": "dog collar" },
+                "brand": { "type": "string", "example": "Fancy Cat" },
+                "description": { "type": "string", "example": "A very elegant cat collar." },
+                "price": { "type": "number", "example": 20.25 },
+                "color": { "type": "string", "example": "golden" },
+                "inStock": { "type": "string", "example": "yes" },
+                "size": { "type": "string", "example": "medium" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "Product updated successfully" },
+          "422": { "description": "Unprocessable Entity" },
+          "404": { "description": "Product not found" },
+          "481": { "description": "Authentication Error" }, "500": { "description": "Some error ocurred while updating product."}
         }
       },
       "delete": {
-        "description": "Deletes the specified product by id.",
+        "description": "Deletes a product by ID.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string", "description": "Product ID" }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "204": { "description": "Product deleted successfully" },
+          "404": { "description": "Product not found" },
+          "481": { "description": "Authentication Error" }, "500": { "description": "Some error ocurred while deleting product"}
         }
       }
     }

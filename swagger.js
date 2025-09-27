@@ -5,8 +5,8 @@ const doc = {
     title: 'Pet Store API',
     description: 'API documentation for the Pet Store project'
   },
-  host: 'localhost:3000',
-  schemes: ['http']
+  host: process.env.SWAGGER_HOST || 'localhost:3000',
+  schemes: [process.env.SWAGGER_SCHEME || 'http']
 };
 
 const outputFile = './swagger-output.json';
